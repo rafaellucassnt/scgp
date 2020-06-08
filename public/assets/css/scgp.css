@@ -1,0 +1,26 @@
+
+/* Profile */
+.img-profile {
+    display: block;
+    margin-left: auto;
+    width: 150px;
+    max-width: 150px;
+    margin-right: auto
+}
+
+/* Table */
+.page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: #6610f2!important;
+    border-color: #6610f2!important;
+    background: #6610f2 linear-gradient(180deg,#7d34f4,#6610f2) repeat-x !important;
+}
+
+.margin-btn{
+    margin-bottom: 3px;
+}
+
+.center-btn{
+    text-align: center;
+}
