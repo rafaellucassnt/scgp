@@ -18,9 +18,7 @@
         <div class="row">
             <div class="col-12">
             <div class="card">
-                @if(Auth::user()->token_trello != null)
-                    @include('app.github.partials.reposit')
-                @else
+                @if(Auth::user()->token_github === null)
                 <div class="card-header">
                     <h3 class="card-title">Vicular conta</h3>
                     <div class="card-tools">
@@ -32,6 +30,8 @@
                 <div class="card-body">
                     Não possui contas vinculadas
                 </div>
+                @else
+                @include('app.github.partials.reposit')
                 @endif
             </div>
         </div>

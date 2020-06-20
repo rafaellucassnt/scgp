@@ -18,7 +18,7 @@
     <div class="row">
         <div class="col-12">
           <div class="card">
-            @if(Auth::user()->token_trello == null || Auth::user()->token_trello === 0 )
+            @if(Auth::user()->token_trello === NULL || Auth::user()->token_trello == " "  )
             <div class="card-header">
                 <h3 class="card-title">Vicular conta</h3>
                 <div class="card-tools">

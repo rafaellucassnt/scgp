@@ -46,6 +46,7 @@
                     <td>{{ \App\Project::getDateAttribute($project->start_date) }}</td>
                     <td>{{ \App\Project::getDateAttribute($project->end_date) }}</td>
                     <td class="center-btn">
+                        @if(Auth::user()->id == $project->user_id)
                         <table class="table-borderless table-sm">
                             <tr>
                                 <td>
@@ -63,6 +64,15 @@
                                 </td>
                             </tr>
                         </table>
+                        @else
+                        <table class="table-borderless table-sm">
+                            <tr>
+                                <td>
+                                    <a href="{{ route('projects.show', $project->id) }}"><button type="submit" class="btn bg-gradient-info btn-sm margin-btn"><i class="far fa-eye"></i></button></a>
+                                </td>
+                            </tr>
+                        </table>
+                        @endif
                     </td>
                 </tr>
                 @endforeach

@@ -34,7 +34,7 @@
 <div class="form-row">
     <div class="form-group col-md-6">
         <label>Quadro Trello</label>
-        @if(Auth::user()->token_trello == null || Auth::user()->token_trello == "" || $trelloData == [] )
+        @if(Auth::user()->token_trello === null || Auth::user()->token_trello == "" || $trelloData == [] )
         <input type="text" class="form-control" placeholder="Vincular conta do Trello para vizualizar os quadros" disabled>
         @else
         <select name="token_board_trello" class="form-control" >
@@ -46,7 +46,7 @@
     </div>
     <div class="form-group col-md-6">
         <label>Repositório GitHub:</label>
-        @if(Auth::user()->token_github == null || Auth::user()->token_github == "" || $gitHubData == [] )
+        @if(Auth::user()->token_github === null || Auth::user()->token_github == "" || $gitHubData == [] )
         <input type="text" class="form-control" placeholder="Vincular conta do GitHub para vizualizar repositórios" disabled>
         @else
         <select name="token_repository_github" class="form-control" >

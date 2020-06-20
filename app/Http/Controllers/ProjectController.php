@@ -23,14 +23,18 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::get();
+        /*$projects = Project::where('user_id', Auth()->user()->id)->get();*/
         return view('app.projects.index', compact('projects'));
     }
 
     public function create()
     {
+        if(Auth()->user()->token_trello === null)
+        {
         $trelloData = [];
         $gitHubData = [];
-
+        }
+        else{
         $client = new Client();
         $key = env('TRELLO_KEY');
 
@@ -53,7 +57,7 @@ class ProjectController extends Controller
             $json = $response_gitHub->getBody();
             $gitHubData = json_decode($json);
         }
-
+    }
         return view ('app.projects.create', ['trelloData' => $trelloData, 'gitHubData' => $gitHubData ] );
 
     }
@@ -80,6 +84,12 @@ class ProjectController extends Controller
 
     public function show($id)
     {
+        if(Auth()->user()->token_trello === null)
+        {
+        $trelloData = [];
+        $gitHubData = [];
+        }
+        else{
         $users = User::get();
         $projects = Project::findOrFail($id);
         $assessments = Assessment::where('projects_id', $id)->get();
@@ -93,14 +103,14 @@ class ProjectController extends Controller
         $api_trello = 'https://api.trello.com/1/boards/' . $token_board . '/cards';
         $response_trello = $client->get($api_trello);
 
-        /*$api_gitHub = 'https://api.github.com/repos/'. $repo_gitHub .'/commits';
+        $api_gitHub = 'https://api.github.com/repos/'. $repo_gitHub .'/commits';
         $response_gitHub = $client->get($api_gitHub);
 
         $api_gitHub_brach = 'https://api.github.com/repos/'. $repo_gitHub .'/branches';
         $response_gitHub_brach = $client->get($api_gitHub_brach);
 
         $api_gitHub_issue = 'https://api.github.com/repos/'. $repo_gitHub .'/issues';
-        $response_gitHub_issue = $client->get($api_gitHub_issue);*/
+        $response_gitHub_issue = $client->get($api_gitHub_issue);
 
         if (!$project = $this->repository->find($id));
 
@@ -109,7 +119,7 @@ class ProjectController extends Controller
             $trelloBoard = json_decode($json);
         }
 
-        /*if ($response_gitHub->getStatusCode() == 200) {
+        if ($response_gitHub->getStatusCode() == 200) {
             $json = $response_gitHub->getBody();
             $gitHubRepository = json_decode($json);
         }
@@ -123,9 +133,9 @@ class ProjectController extends Controller
         if ($response_gitHub_issue->getStatusCode() == 200) {
             $json = $response_gitHub_issue->getBody();
             $gitHubIssue = json_decode($json);
-        }*/
-
-        return view('app.projects.show')->with(['project' => $project, 'assessments' => $assessments,  'users' => $users, 'trelloBoard' => $trelloBoard, /*'gitHubRepository' => $gitHubRepository, 'gitHubBranch' => $gitHubBranch, 'gitHubIssue' => $gitHubIssue*/]);
+        }
+    }
+        return view('app.projects.show')->with(['project' => $project, 'assessments' => $assessments,  'users' => $users, 'trelloBoard' => $trelloBoard, 'gitHubRepository' => $gitHubRepository, 'gitHubBranch' => $gitHubBranch, 'gitHubIssue' => $gitHubIssue]);
     }
 
     public function edit($id)
@@ -164,7 +174,6 @@ class ProjectController extends Controller
         $project->update([
             'title'  => $request['title'],
             'type'  => $request['type'],
-            'user_id'  => $request['user_id'],
             'description'  => $request['description'],
             'status'  => $request['status'],
             'token_repository_github' => $request['token_repository_github'],

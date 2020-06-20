@@ -9,7 +9,7 @@
       @foreach ( $gitHubIssue as $issue )
       <div class="card-footer card-comments">
         <div class="card-comment">
-          <a class="link-issue" href="{{ $issue->html_url }}">
+          <a class="link-issue" href="{{ $issue->html_url }}" target="_blank">
             {{ $issue->title }}
           </a>
           @foreach ( $issue->labels as $label )
@@ -28,8 +28,7 @@
                 <img class="avatar img-s" src="{{ $issue->assignee->avatar_url }}" alt="User Image"/>
               </p>
               <p>
-                #{{ $issue->number }} opened {{ $issue->created_at }} by {{
-                $issue->user->login }}
+                {{ $issue->number }} opened {{ $issue->created_at }} by {{ $issue->user->login }}
               </p>
             </span>
           </div>

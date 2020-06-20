@@ -200,10 +200,10 @@ return [
                     'text' => 'Relatórios',
                     'url'  => 'assessments',
                 ],
-                [
+                /*[
                     'text' => 'Tarefas',
                     'url'  => 'tasks',
-                ],
+                ],*/
             ],
         ],
         ['header' => 'Configurações da Conta'],

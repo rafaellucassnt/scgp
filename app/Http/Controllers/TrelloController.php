@@ -20,7 +20,7 @@ class TrelloController extends Controller
 
     public function index()
     {
-        if(Auth()->user()->token_trello === null)
+        if(Auth()->user()->token_trello === NULL || Auth()->user()->token_trello == " ")
         {
             return view('app.trello.index');
         }

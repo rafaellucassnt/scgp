@@ -52,7 +52,7 @@
                         <div class="tab-pane active" id="sobre">
                             @include('app.projects.partials.detail')
 
-                           {{-- @include('app.projects.partials.issues') --}}
+                            @include('app.projects.partials.issues')
                         </div>
 
                         <div class="tab-pane" id="time">
@@ -60,11 +60,11 @@
                         </div>
 
                         <div class="tab-pane" id="trello">
-                            {{-- @include('app.projects.partials.cards') --}}
+                            @include('app.projects.partials.cards')
                         </div>
 
                         <div class="tab-pane" id="github">
-                            {{-- @include('app.projects.partials.reposit') --}}
+                            @include('app.projects.partials.reposit')
                         </div>
 
                         <div class="tab-pane" id="relatorio">
